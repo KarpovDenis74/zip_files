@@ -7,7 +7,7 @@ from datetime import datetime, date
 import shutil
 
 
-zip_file = '1.zip'
+zip_file = Path('1.zip')
 
 dir = Path(datetime.strftime(datetime.now(), '%Y%m%d%H%M%S'))
 # with zipfile.ZipFile(zip_file, 'r') as zf:
@@ -31,6 +31,8 @@ with zipfile.ZipFile(zip_file, 'r') as zf:
         else:
             os.rename(name,name.encode('cp437').decode('cp866'))
             list_files.append(name)
+            shutil.copyfile(name.encode('cp437').decode('cp866'),
+                            'media/' + name.encode('cp437').decode('cp866').split('/')[-1])
             # os.remove(name)
 
     print(f'{list_files=}')
